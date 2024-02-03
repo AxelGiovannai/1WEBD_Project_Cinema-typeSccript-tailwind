@@ -1,30 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cinema App - Accueil</title>
-  <link href="../../style.css" rel="stylesheet">
-  <!-- Ajoutez vos liens vers les fichiers CSS, JS, etc. -->
+    <title>Login Page</title>
 </head>
 <body>
-  <header>
-  
-    <nav>
-      <ul>
-        <li><a href="../index/index.html">Accueil</a></li>
-        <li><a href="../search/search.html">Recherche</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main class="bg-slate-500">
-    <h1 class=" text-red-400">Films en Tendance</h1>
-    <!-- Affichez les films en tendance ici -->
-    <div id="movies-list"></div>
-    <!-- Liens vers movie.html pour plus de détails sur chaque film -->
-    <a href="../movie/movie.html">Voir plus</a>
-  </main>
-  <script type="module" src="./index.ts"></script>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../home/home.html">Accueil</a></li>
+                <li><a href="../search/search.html">Recherche</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="content" align="center">
+        <form id="login-form">
+            <h1>Login</h1>
+            <input type="text" id="username" placeholder="Username" required><br><br>
+            <input type="password" id="password" placeholder="Password" required><br><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    <script src="log.js"></script>
 </body>
 </html>
-

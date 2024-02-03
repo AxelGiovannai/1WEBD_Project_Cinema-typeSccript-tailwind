@@ -4,12 +4,12 @@
     "\\public",
     "\\src",
     "\\src\\auth",
-    "\\src\\Log",
     "\\src\\pages",
+    "\\src\\pages\\home",
     "\\src\\pages\\index",
     "\\src\\pages\\movie",
     "\\src\\pages\\search"
   ],
-  "SelectedNode": "\\src\\auth\\auth.ts",
+  "SelectedNode": "\\src\\pages\\home\\home.html",
   "PreviewInSolutionExplorer": false
 }
