@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Login Page</title>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="../home/home.html">Accueil</a></li>
-                <li><a href="../search/search.html">Recherche</a></li>
+                <li><a href="./src/pages/home/home.html">Accueil</a></li>
+                <li><a href="./src/pages/search/search.html">Recherche</a></li>
             </ul>
         </nav>
     </header>
-    <div id="content" align="center">
+    <div id="content" class="text-center">
         <form id="login-form">
             <h1>Login</h1>
             <input type="text" id="username" placeholder="Username" required><br><br>
             <input type="password" id="password" placeholder="Password" required><br><br>
             <input type="submit" value="Login">
+            <a href="/home/home.html">Continuer en tant qu'invité</a>
         </form>
     </div>
-    <script src="index.ts"></script>
+    <script type="module" src="index.ts"></script>
 </body>
 </html>

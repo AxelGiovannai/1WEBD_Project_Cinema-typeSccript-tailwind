@@ -1,4 +1,4 @@
-
+import {TMDB_Tokken_Session} from './src/auth/auth';
 
 document.getElementById('login-form')?.addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -20,7 +20,7 @@ document.getElementById('login-form')?.addEventListener('submit', async function
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZjI1YzJkOTc2M2ZjYWY2YmFiYTVlY2FkMjc4MTMwNSIsInN1YiI6IjY1YjI1Y2Y3MWM2MzI5MDE1MjkzM2MxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lY5XuqkOrFrSTeOER0B3t4b0nfv2_-C8uOwl8N70bkw', // Replace with your API key
+                Authorization: `Bearer ${TMDB_Tokken_Session}`,
             },
         };
 
@@ -50,13 +50,14 @@ document.getElementById('login-form')?.addEventListener('submit', async function
             headers: {
                 accept: 'application/json',
                 'content-type': 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZjI1YzJkOTc2M2ZjYWY2YmFiYTVlY2FkMjc4MTMwNSIsInN1YiI6IjY1YjI1Y2Y3MWM2MzI5MDE1MjkzM2MxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lY5XuqkOrFrSTeOER0B3t4b0nfv2_-C8uOwl8N70bkw', // Replace with your API key
+                Authorization: `Bearer ${TMDB_Tokken_Session}`,
             },
             body: JSON.stringify({
                 username,
                 password,
                 request_token: requestToken,
             }),
+            console: console.log('options')
         };
 
         try {
