@@ -1,4 +1,4 @@
-import '../src/style.css';
+import '../../style.css';
 
 interface Movie {
     title: string;
