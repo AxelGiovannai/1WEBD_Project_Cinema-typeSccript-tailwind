@@ -1,70 +1,86 @@
-document.getElementById('login-form')?.addEventListener('submit', function (event) {
+
+
+document.getElementById('login-form')?.addEventListener('submit', async function (event) {
     event.preventDefault();
+    // Function to parse form data
+    const getFormData = () => {
+        const usernameInput = document.getElementById('username') as HTMLInputElement;
+        const passwordInput = document.getElementById('password') as HTMLInputElement;
 
-    const usernameElement = document.getElementById('username') as HTMLInputElement;
-    const passwordElement = document.getElementById('password') as HTMLInputElement;
+        const username = usernameInput.value;
+        const password = passwordInput.value;
 
-    let username = '';
-    let password = '';
+        return { username, password };
+    };
 
-    if (usernameElement && passwordElement) {
-        username = usernameElement.value;
-        password = passwordElement.value;
+    // Step 1: Create a request token
+    const getRequestToken = async () => {
+        const url = 'https://api.themoviedb.org/3/authentication/token/new';
+        const options = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZjI1YzJkOTc2M2ZjYWY2YmFiYTVlY2FkMjc4MTMwNSIsInN1YiI6IjY1YjI1Y2Y3MWM2MzI5MDE1MjkzM2MxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lY5XuqkOrFrSTeOER0B3t4b0nfv2_-C8uOwl8N70bkw', // Replace with your API key
+            },
+        };
 
- 
-    } else {
-        console.error('Error: username or password element not found');
-    }
+        try {
+            const response = await fetch(url, options);
+            const json = await response.json();
+            console.log('Request Token:', json);
+            return json.request_token;
+        } catch (error) {
+            console.error('Error requesting token:', error);
+            throw error;
+        }
+    };
 
-    // First, get a new request token
-    fetch('https://api.themoviedb.org/3/authentication/token/new?api_key=5f25c2d9763fcaf6baba5ecad2781305')
-        .then(response => response.json())
-        .then(data => {
-            const requestToken = data.request_token;
+    // Step 2: Ask the user for permission
+    const askForPermission = (requestToken: string) => {
+        const authenticateUrl = `https://www.themoviedb.org/authenticate/${requestToken}`;
+        console.log('Authenticate URL:', authenticateUrl);
+        // Redirect the user to authenticateUrl or use it as needed
+    };
 
-            // Then, validate the login with the request token
-            const options = {
-                method: 'POST',
-                headers: {
-                    accept: 'application/json',
-                    'content-type': 'application/json',
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZjI1YzJkOTc2M2ZjYWY2YmFiYTVlY2FkMjc4MTMwNSIsInN1YiI6IjY1YjI1Y2Y3MWM2MzI5MDE1MjkzM2MxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lY5XuqkOrFrSTeOER0B3t4b0nfv2_-C8uOwl8N70bkw'
-                },
-                body: JSON.stringify({ username: username, password: password, request_token: requestToken })
-            };
+    // Step 3: Create a session ID
+    const createSessionId = async (username: string, password: string, requestToken: string) => {
+        const url = 'https://api.themoviedb.org/3/authentication/token/validate_with_login';
+        const options = {
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json',
+                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZjI1YzJkOTc2M2ZjYWY2YmFiYTVlY2FkMjc4MTMwNSIsInN1YiI6IjY1YjI1Y2Y3MWM2MzI5MDE1MjkzM2MxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lY5XuqkOrFrSTeOER0B3t4b0nfv2_-C8uOwl8N70bkw', // Replace with your API key
+            },
+            body: JSON.stringify({
+                username,
+                password,
+                request_token: requestToken,
+            }),
+        };
 
-            return fetch('https://api.themoviedb.org/3/authentication/token/validate_with_login', options);
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // If the request token is validated, create a new session
-                const options = {
-                    method: 'POST',
-                    headers: {
-                        accept: 'application/json',
-                        'content-type': 'application/json',
-                        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZjI1YzJkOTc2M2ZjYWY2YmFiYTVlY2FkMjc4MTMwNSIsInN1YiI6IjY1YjI1Y2Y3MWM2MzI5MDE1MjkzM2MxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.lY5XuqkOrFrSTeOER0B3t4b0nfv2_-C8uOwl8N70bkw'
-                    },
-                    body: JSON.stringify({ request_token: data.request_token })
-                };
+        try {
+            const response = await fetch(url, options);
+            const json = await response.json();
+            console.log('Session ID:', json);
+            return json.session_id;
+        } catch (error) {
+            console.error('Error creating session ID:', error);
+            throw error;
+        }
+    };
 
-                return fetch('https://api.themoviedb.org/3/authentication/session/new', options);
-            } else {
-                throw new Error('Login failed');
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Save the session ID for future API requests
-                localStorage.setItem('session_id', data.session_id);
+    // Event listener for form submission
 
-                // Redirect to the movie page
-                window.location.href = 'index.html';
-            } else {
-                alert('Session creation failed');
-            }
-        })
-        .catch(error => console.error('Error:', error));
+
+        try {
+            const requestToken = await getRequestToken();
+            askForPermission(requestToken);
+            // Retrieve username and password from the form
+            const { username, password } = getFormData();
+            const sessionId = await createSessionId(username, password, requestToken);
+            console.log('Final Session ID:', sessionId);
+        } catch (error) {
+            console.error('Error during form submission:', error);
+        }
 });
