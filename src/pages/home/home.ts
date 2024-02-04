@@ -8,7 +8,7 @@ interface Movie {
   }
 
 
-  const url = "https://api.themoviedb.org/3/trending/movie/week?api_key=cbeed44a15dca57acd384f840eb18260";
+const url = "https://api.themoviedb.org/3/trending/movie/week?api_key=5f25c2d9763fcaf6baba5ecad2781305";
   
   fetch(url)
     .then(response => response.json())

@@ -17,7 +17,7 @@ document.getElementById('login-form')?.addEventListener('submit', function (even
     }
 
     // First, get a new request token
-    fetch('https://api.themoviedb.org/3/authentication/token/new?api_key=cbeed44a15dca57acd384f840eb18260')
+    fetch('https://api.themoviedb.org/3/authentication/token/new?api_key=5f25c2d9763fcaf6baba5ecad2781305')
         .then(response => response.json())
         .then(data => {
             const requestToken = data.request_token;
