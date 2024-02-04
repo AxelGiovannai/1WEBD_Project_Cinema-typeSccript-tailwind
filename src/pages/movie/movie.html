@@ -10,7 +10,7 @@
   <header>
     <nav>
       <ul>
-        <li><a href="../../../home/home.html">Accueil</a></li>
+        <li><a href="../home/home.html">Accueil</a></li>
         <li><a href="../search/search.html">Recherche</a></li>
       </ul>
     </nav>
@@ -18,6 +18,11 @@
   <main>
     <div id="movie-details"></div>
     <!-- Ajoutez un formulaire pour ajouter un commentaire -->
+    <div id="movie-reviews"></div>
+    <div id="add-rating">
+      <input type="number" id="rating" min="1" max="10" step="1" required>
+      <input type="submit" value="Ajouter une note" id="submit-rate">
+    </div>
   </main>
   <script type="module" src="../movie/movie.ts"></script>
 </body>

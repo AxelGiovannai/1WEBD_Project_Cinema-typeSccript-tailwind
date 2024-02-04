@@ -15,6 +15,28 @@ export default {
     extend: {},
   },
 
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const sizes = {
+        'w-50-h-50': {
+          width: '40%',
+          height: '40%',
+        },
+        // Ajoutez d'autres tailles personnalisées au besoin
+      };
+
+      const utilities = {};
+
+      for (const key in sizes) {
+        const size = sizes[key];
+        utilities[`.${key}`] = {
+          width: size.width,
+          height: size.height,
+        };
+      }
+
+      addUtilities(utilities, ['responsive', 'hover']);
+    }
+  ],
 };
 

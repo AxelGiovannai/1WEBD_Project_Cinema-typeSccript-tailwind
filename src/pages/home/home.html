@@ -7,20 +7,20 @@
   <link href="../../style.css" rel="stylesheet">
   <!-- Ajoutez vos liens vers les fichiers CSS, JS, etc. -->
 </head>
-<body class="bg-gray-200">
+<body class="bg-gray-100">
   <header class="bg-blue-500 p-4">
     <nav>
-        <ul class="flex justify-center space-x-4">
-            <li class="col-span-1 text-white"><a href="../home/home.html">Accueil</a></li>
-            <li class="col-span-2 text-white"><a href="../search/search.html">Recherche</a></li>
-            <li class="col-span-3 text-white"><a href="../../../index.html">Retour à l'index</a></li>
+        <ul class="flex justify-center space-x-16 px-5">
+            <li class="col-span-1 text-white hover:bg-blue-700 py-2 px-4 rounded"><a href="../home/home.html">Accueil</a></li>
+            <li class="col-span-2 text-white hover:bg-blue-700 py-2 px-4 rounded"><a href="../search/search.html">Recherche</a></li>
+            <li class="col-span-3 text-white hover:bg-blue-700 py-2 px-4 rounded"><a href="../../../index.html">Connexion</a></li>
         </ul>
     </nav>
   </header>
-  <main class="bg-gray-50">
-    <h1 class=" text-red-400 text-pretty text-center text-">Films en Tendance</h1>
+  <main class="bg-gray-100">
+    <h1 class=" text-grey-800 text-pretty text-center text-4xl pt-10">Films en Tendance</h1>
     <!-- Affichez les films en tendance ici -->
-    <div id="movies-list" class="text-center grid grid-cols-2 gap-4"></div>
+    <div id="movies-list" class="text-center flex flex-wrap border-collapse "></div>
   </main>
   <script type="module" src="./home.ts"></script>
 </body>
