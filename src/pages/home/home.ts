@@ -15,7 +15,7 @@ interface Movie {
     .then(data => {
       const movies: Movie[] = data.results;
       let moviesHTML = '';
-      movieElement.classList.add();
+  
       movies.forEach(movie => {
         moviesHTML += `
           <div class=" " >
