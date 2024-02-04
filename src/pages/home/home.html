@@ -7,19 +7,20 @@
   <link href="../../style.css" rel="stylesheet">
   <!-- Ajoutez vos liens vers les fichiers CSS, JS, etc. -->
 </head>
-<body>
-  <header>
+<body class="bg-gray-200">
+  <header class="bg-blue-500 p-4">
     <nav>
-        <ul>
-            <li><a href="../home/home.html">Accueil</a></li>
-            <li><a href="../search/search.html">Recherche</a></li>
+        <ul class="flex justify-center space-x-4">
+            <li class="col-span-1 text-white"><a href="../home/home.html">Accueil</a></li>
+            <li class="col-span-2 text-white"><a href="../search/search.html">Recherche</a></li>
+            <li class="col-span-3 text-white"><a href="../../../index.html">Retour à l'index</a></li>
         </ul>
     </nav>
   </header>
-  <main class="bg-slate-500">
-    <h1 class=" text-red-400">Films en Tendance</h1>
+  <main class="bg-gray-50">
+    <h1 class=" text-red-400 text-pretty text-center text-">Films en Tendance</h1>
     <!-- Affichez les films en tendance ici -->
-    <div id="movies-list"></div>
+    <div id="movies-list" class="text-center grid grid-cols-2 gap-4"></div>
   </main>
   <script type="module" src="./home.ts"></script>
 </body>
