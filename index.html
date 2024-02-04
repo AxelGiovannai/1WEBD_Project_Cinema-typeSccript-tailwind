@@ -1,14 +1,25 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/src/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CinemaConnect</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <a href="./src/pages/index/index.html" class="button">Go to other file</a>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../home/home.html">Accueil</a></li>
+                <li><a href="../search/search.html">Recherche</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="content" align="center">
+        <form id="login-form">
+            <h1>Login</h1>
+            <input type="text" id="username" placeholder="Username" required><br><br>
+            <input type="password" id="password" placeholder="Password" required><br><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    <script src="index.ts"></script>
+</body>
 </html>
