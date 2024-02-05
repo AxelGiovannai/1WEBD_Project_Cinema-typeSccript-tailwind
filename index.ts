@@ -1,5 +1,42 @@
 import { TMDB_API_KEY } from './src/auth/auth';
 
+const checkSessionId = () => {
+    const sessionId = localStorage.getItem('tmdb_session_id');
+    if (sessionId) {
+        const loginForm = document.getElementById('login-form');
+        if (loginForm) {
+            // Create a parent container
+            const container = document.createElement('div');
+            container.style.position = 'relative';
+
+            // Hide the login form
+            loginForm.style.display = 'none';
+
+            // Replace the login form with the logged section
+            const loggedSection = document.createElement('section');
+            loggedSection.id = 'Logged';
+            loggedSection.innerHTML = `
+                <div id="content" class="flex justify-center items-center h-screen ">
+                    <form id="logged-form" class="bg-white shadow-md rounded px-32 pb-8 pl-20 pr-20 mb-4 mt-30">
+                        <h1 class="text-2xl font-semibold mb-8 mt-12 px-20 ">Vous êtes déjà connecté!</h1>
+                        <p class="font-semibold mb-8 mt-12 px-20 ">Vous pouvez vous déconnecter en cliquant sur le bouton ci-dessous.</p>
+                        <div class="mt-8">
+                            <input type="submit" value="Logout" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+                        </div>
+                    </form>
+                </div>
+            `;
+
+            // Append the section to the parent container
+            container.appendChild(loggedSection);
+
+            // Replace the login form with the parent container
+            loginForm.replaceWith(container);
+        }
+    }
+};
+
+
 document.getElementById('login-form')?.addEventListener('submit', async function (event) {
     event.preventDefault();
 
@@ -92,6 +129,7 @@ document.getElementById('login-form')?.addEventListener('submit', async function
         const sessionId = await createSessionId(requestToken);
         if (sessionId) {
             console.log('Session ID saved to localStorage:', sessionId);
+            checkSessionId();
         }
     } catch (error) {
         console.error('Error during form submission:', error);

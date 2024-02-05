@@ -25,9 +25,18 @@ if (movieId) {
     .then(response => response.json())
     .then((movie: MovieDetails) => {
       const movieDetailsHTML = `
-        <h2>${movie.title}</h2>
-        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-        <p>${movie.overview}</p>
+      <div class="max-w-full bg-white pt-10 mb">
+        <div class="relative max-w-2xl mx-auto bg-white shadow-md rounded mt-0">
+          <h2 class="text-center bg-blue-400 flex-inline text-white text-4xl py-5 my-10" >${movie.title}</h2>
+        </div>
+        <div class="flex justify-center align-middle items-center pt-5 ">
+          <img src="https://image.tmdb.org/t/p/w400${movie.poster_path}" alt="${movie.title}">
+        </div>
+        <div class="mt-16 text-center mr-10 ml-10 mx-20">
+        <p class="flex align-middle text-center text-md text-pretty font-bold mb-10">${movie.overview}</p>
+        </div>
+        <div class="h-10">
+      </div>
       `;
 
       const movieDetails = document.getElementById('movie-details');
@@ -44,13 +53,18 @@ if (movieId) {
     .then(response => response.json())
     .then(data => {
       const reviews = data.results as MovieReview[];
-      let reviewsHTML = '<h3>Reviews</h3>';
+      let reviewsHTML = '<h3 class=" px-10 py-4 font-bold text-center max-w-50 bg-blue-100 text-black text-2xl shadow-lg mb-20">Reviews</h3>';
 
       if (reviews.length) {
         reviews.forEach(review => {
           reviewsHTML += `
             <div class="review">
-              <p><strong>${review.author}</strong>: ${review.content}</p>
+              <div class="text-center mx-20 border-separate bg-white my-5 py-5 shadow-xl border border-blue-200 rounded">
+              <p class=" text-center flex-col text-xl mb-10"><strong>${review.author}</strong></p> 
+              <div class="flex justify-center text-center">
+              <p class=" px-5 text-pretty mx-22 min-w-80">${review.content}</p>
+              </div>
+              </div>
             </div>
           `;
         });
@@ -85,4 +99,4 @@ if (movieId) {
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error('Error posting rating:', error));
-};*/
+};/*/

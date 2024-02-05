@@ -39,28 +39,3 @@ p {
 .button:hover {
     background-color: #0056b3;
 }
-
-/*#displayFilms {
-    display: flexbox;
-    align-items: center;
-    margin-bottom: 3em;
-    margin-top: 3em;
-    margin-left: 5em;
-    margin-right: 5em;
-}
-#displayFilms h2 {
-    margin-bottom: 1em;
-    margin-top: 1em;
-    margin-left: 1em;
-    margin-right: 1em;
-    text-align: center;
-    font-size: 2em;
-    font-weight: bold;
-    color: #007bff;
-}
-#moviePoster {
-    align-self: center;
-    display: flex;
-    justify-content: center;
-}*/
-

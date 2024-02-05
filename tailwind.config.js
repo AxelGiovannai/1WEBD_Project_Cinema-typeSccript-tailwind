@@ -22,7 +22,14 @@ export default {
           width: '40%',
           height: '40%',
         },
-        // Ajoutez d'autres tailles personnalisées au besoin
+        'min-h-80dvh': {
+          minHeight: '80dvh',
+          maxHeight: '80dvh',
+        },
+        'mx-auto': {
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        },
       };
 
       const utilities = {};
@@ -32,6 +39,10 @@ export default {
         utilities[`.${key}`] = {
           width: size.width,
           height: size.height,
+          minHeight: size.minHeight,
+          maxHeight: size.maxHeight,
+          marginLeft: 'auto',
+          marginRight: 'auto', // Add this line to make margin fit to the element
         };
       }
 
