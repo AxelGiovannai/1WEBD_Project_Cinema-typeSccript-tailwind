@@ -30,7 +30,7 @@ if (movieId) {
       const movieDetailsHTML = `
       <div class="max-w-full bg-white pt-10 mb">
         <div class="relative max-w-2xl mx-auto bg-white shadow-md rounded mt-0">
-          <h2 id="movieTitle" class="text-center bg-blue-400/50 flex-inline text-white text-4xl py-5 my-10" >${movie.title}</h2>
+          <h2 id="movieTitle" class="text-center bg-gray-400/90 flex-inline text-white text-4xl py-5 my-10 rounded-md" >${movie.title}</h2>
         </div>
         <div class="flex justify-center align-middle items-center pt-5 ">
           <img src="https://image.tmdb.org/t/p/w400${movie.poster_path}" alt="${movie.title}">

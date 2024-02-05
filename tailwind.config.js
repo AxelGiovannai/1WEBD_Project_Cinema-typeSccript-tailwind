@@ -22,14 +22,15 @@ export default {
           width: '40%',
           height: '40%',
         },
-        'min-h-80dvh': {
-          minHeight: '80dvh',
-          maxHeight: '80dvh',
+        'min-h-45em': {
+          minHeight: '45em',
+          maxHeight: '45em',
         },
         'mx-auto': {
           marginLeft: 'auto',
           marginRight: 'auto',
         },
+
       };
 
       const utilities = {};

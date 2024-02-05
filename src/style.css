@@ -54,3 +54,16 @@ p {
       -1px  1px 0 #000,
        1px  1px 0 #000;
 }
+
+#titleSearch {
+    margin-bottom: 1em;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+}
+
+#moviePoster {
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}

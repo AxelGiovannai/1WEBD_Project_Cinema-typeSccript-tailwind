@@ -18,12 +18,12 @@ function searchMovies(query: string, page: number = 1) {
                 data.results.forEach((movie: any, index: number) => {
                     let movieElement = document.createElement('div');
                     movieElement.innerHTML = `
-                        <div id="movie-${index + 1}" class="relative min-w-md max-w-md min-h-0dvh bg-white shadow-md rounded ${currentPage === 1 && index === 0 ? 'mt-10' : ''}">
+                        <div id="movie-${index + 1}" class="relative max-w-md min-h-45em bg-white shadow-md rounded ${currentPage === 1 && index === 0 ? 'mt-10' : ''}">
                             <div class="text-center text-2xl font-bold text-blue-500">
-                                <h2 class="px-20 py-5">${movie.title}</h2>
+                                <h2 id="titleSearch" class="px-20 py-5">${movie.title}</h2>
                             </div>
                             <div class="flex justify-center">
-                                <img class="w-50-h-50" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" id="moviePoster">
+                                <img class="w-50-h-50" id="moviePoster" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" id="moviePoster">
                             </div>
                             <div class="mt-10 text-center mr-10 ml-10 mb-10">
                             <p class="text-lg">${movie.overview.split('.')[0]}.</p>
