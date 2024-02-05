@@ -88,7 +88,7 @@ if (movieId) {
           `;
         });
       } else {
-        reviewsHTML += '<p>No reviews available.</p>';
+        reviewsHTML += '<p class=" text-center justify-center bg-slate-50 text-black snap-center font-extralight decoration-dashed text-2xl">La section commentraire est vide...</p>';
       }
 
       const reviewsElement = document.getElementById('movie-reviews');
