@@ -19,6 +19,7 @@ interface MovieReview {
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
 
+
 if (movieId) {
   const movieUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}`;
   const reviewsUrl = `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${TMDB_API_KEY}`;
@@ -37,6 +38,9 @@ if (movieId) {
         <div class="mt-16 text-center mr-10 ml-10 mx-20">
         <p class=" text-center text-md text-pretty font-bold mb-10">${movie.overview}</p>
         </div>
+        
+        <p class=" text-center text-md text-pretty font-bold mb-10">Budget:</p>
+        <p class=" text-center text-md text-pretty font-bold mb-10">Revenue:</p>
         <div class="h-10">
       </div>
       `;
@@ -66,6 +70,8 @@ if (movieId) {
               <div class="flex justify-center text-center">
               <p class=" px-5 text-pretty mx-22 min-w-80">${review.content}</p>
               </div>
+              <div class="flex justify-center text-center">
+              <p class="text-center text-blue-500 font-bold"></p>
               </div>
             </div>
           `;
@@ -102,6 +108,9 @@ const addMovieRating = (movieId: string, rating: number) => {
     .then(data => console.log(data))
     .catch(error => console.error('Error posting rating:', error));
 };
+
+
+  
 document.getElementById('rating-form')?.addEventListener('submit', event => {
   event.preventDefault();
   const ratingInput = document.getElementById('rating') as HTMLInputElement;
