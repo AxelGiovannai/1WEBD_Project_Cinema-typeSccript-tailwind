@@ -38,9 +38,6 @@ if (movieId) {
         <div class="mt-16 text-center mr-10 ml-10 mx-20">
         <p class=" text-center text-md text-pretty font-bold mb-10">${movie.overview}</p>
         </div>
-        
-        <p class=" text-center text-md text-pretty font-bold mb-10">Budget:</p>
-        <p class=" text-center text-md text-pretty font-bold mb-10">Revenue:</p>
         <div class="h-10">
       </div>
       `;
