@@ -18,7 +18,7 @@ function searchMovies(query: string, page: number = 1) {
                 data.results.forEach((movie: any, index: number) => {
                     let movieElement = document.createElement('div');
                     movieElement.innerHTML = `
-                        <div id="movie-${index + 1}" class="relative min-w-md max-w-md min-h-80dvh bg-white shadow-md rounded ${currentPage === 1 && index === 0 ? 'mt-10' : ''}">
+                        <div id="movie-${index + 1}" class="relative min-w-md max-w-md min-h-0dvh bg-white shadow-md rounded ${currentPage === 1 && index === 0 ? 'mt-10' : ''}">
                             <div class="text-center text-2xl font-bold text-blue-500">
                                 <h2 class="px-20 py-5">${movie.title}</h2>
                             </div>

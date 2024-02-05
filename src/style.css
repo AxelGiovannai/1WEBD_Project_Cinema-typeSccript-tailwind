@@ -39,3 +39,18 @@ p {
 .button:hover {
     background-color: #0056b3;
 }
+
+#movieTitle {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-rendering: optimizeLegibility;
+    text-transform: uppercase;
+    text-shadow: 
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+      -1px  1px 0 #000,
+       1px  1px 0 #000;
+}
