@@ -28,8 +28,8 @@ function searchMovies(query: string, page: number = 1) {
                             <div class="mt-10 text-center mr-10 ml-10 mb-10">
                             <p class="text-lg">${movie.overview.split('.')[0]}.</p>
                             </div>
-                            <div class="bg-blue-500 text-white font-bold py-2 ml-32 mr-32 rounded absolute bottom-5 left-0 right-0 mx-4 mb-6 mt-18">
-                                <a href="../movie/movie.html?id=${movie.id}">Voir plus</a>
+                            <div>
+                                <a class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 ml-32 mr-32 rounded absolute bottom-5 left-0 right-0 mx-4 mb-6 mt-18" href="../movie/movie.html?id=${movie.id}">Voir plus</a>
                             </div>
                             <div class="h-28">
                             </div>

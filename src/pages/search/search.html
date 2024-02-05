@@ -7,20 +7,21 @@
   <link href="../../style.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-  <header class="bg-blue-500 p-4">
+  <header class="bg-blue-500 p-2">
     <nav>
       <ul class="flex justify-center space-x-16 px-5">
-          <li class="col-span-1 text-white hover:bg-blue-700 py-2 px-4 rounded"><a href="../home/home.html">Accueil</a></li>
-          <li class="col-span-2 text-white hover:bg-blue-700 py-2 px-4 rounded"><a href="../search/search.html">Recherche</a></li>
-          <li class="col-span-3 text-white hover:bg-blue-700 py-2 px-4 rounded"><a href="../../../index.html">Connexion</a></li>
+          <li><a class="col-span-1 text-white hover:bg-blue-700 py-5 px-4 rounded block font-semibold" href="../home/home.html">Accueil</a></li>
+          <li><a class="col-span-2 text-white hover:bg-blue-700 py-5 px-4 rounded block font-semibold" href="../search/search.html">Recherche</a></li>
+          <li><a class="col-span-3 text-white hover:bg-blue-700 py-5 px-4 rounded block font-semibold" href="../../../index.html">Connexion</a></li>
       </ul>
   </nav>
   </header>
+  </header>
   <main>
-    <div class="border-separate min-w-full pb-5 bg-blue-400/10 shadow-lg">
-    <h1 class=" text-black flex justify-center text-center items-center pt-4">Recherche de Films</h1>
+    <div class="border-separate min-w-full pb-2 shadow-lg">
+    <h1 class=" text-black flex justify-center uppercase text-2xl text-center items-center pt-2">Recherche de Films</h1>
     <div id="search-container" class="flex justify-center pb-4">
-        <input type="text" id="search-bar" placeholder="Search for a movie...">
+        <input class="border-solid rounded w-72 border-blue-500" type="text" id="search-bar" placeholder="Search for a movie...">
     </div>
     </div>
     <div id="search-results" class="absolute text-center inline-flex justify-center flex-wrap border-collapse space-x-3 space-y-10 fi:mt-40"></div>

@@ -10,9 +10,9 @@
   <header class="bg-blue-500 p-2">
     <nav>
       <ul class="flex justify-center space-x-16 px-5">
-          <li class="col-span-1 text-white hover:bg-blue-700 py-2 px-4 rounded"><a href="../home/home.html">Accueil</a></li>
-          <li class="col-span-2 text-white hover:bg-blue-700 py-2 px-4 rounded"><a href="../search/search.html">Recherche</a></li>
-          <li class="col-span-3 text-white hover:bg-blue-700 py-2 px-4 rounded"><a href="../../../index.html">Connexion</a></li>
+          <li><a class="col-span-1 text-white hover:bg-blue-700 py-5 px-4 rounded block font-semibold" href="../home/home.html">Accueil</a></li>
+          <li><a class="col-span-2 text-white hover:bg-blue-700 py-5 px-4 rounded block font-semibold" href="../search/search.html">Recherche</a></li>
+          <li><a class="col-span-3 text-white hover:bg-blue-700 py-5 px-4 rounded block font-semibold" href="../../../index.html">Connexion</a></li>
       </ul>
   </nav>
   </header>
@@ -24,13 +24,13 @@
       <form id="rating-form" class="mt-10 text-center inline-block justify-center align-middle">
         <div class="grid grid-cols-5 grid-rows-5 gap-x-0 gap-y-0">
           <div class="col-start-1 col-end-6 row-start-1 row-end-2">
-            <label for="rating" class="text-xl text-red-500 font-semibold mb-2">Ajouter une note (1-10)</label>
+            <label for="rating" class="text-xl text-red-500 font-semibold mb-2">Ajoutez une note (1-10)</label>
           </div>
           <div class="col-start-1 col-end-4 row-start-2 row-end-4">
-            <input type="number" id="rating" min="1" max="10" step="1" class="border-2 h-10 border-sky-500 rounded mb-2" required>
+            <input type="number" id="rating" min="1" max="10" step="1" class="border-2 text-xl h-10 border-sky-500/50 rounded mb-2" required>
           </div>
           <div class="col-start-4 col-end-6 row-start-2 row-end-3">
-            <button type="submit" value="Ajouter une note" id="submit-rate" class="mb-2 bg-blue-400 text-white hover:bg-blue-700 py-2 px-4 rounded ">Envoyer</button>
+            <button type="submit" value="Ajouter une note" id="submit-rate" class="mb-2  bg-blue-400 text-white hover:bg-blue-700 py-2 px-4 rounded ">Envoyer</button>
           </div>
           <p id="rating-updated" class="col-start-1 col-end-6 row-start-4 row-end-5 text-center text-green-500 font-semibold"></p>
         </div>

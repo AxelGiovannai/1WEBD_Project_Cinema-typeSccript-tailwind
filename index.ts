@@ -16,9 +16,9 @@ const checkSessionId = () => {
             const loggedSection = document.createElement('section');
             loggedSection.id = 'Logged';
             loggedSection.innerHTML = `
-                <div id="content" class="flex justify-center items-center h-screen ">
-                    <form id="logged-form" class="bg-white shadow-md rounded px-32 pb-8 pl-20 pr-20 mb-4 mt-30">
-                        <h1 class="text-2xl font-semibold mb-8 mt-12 px-20 ">Vous êtes déjà connecté!</h1>
+                <div id="logout" class="screen-h">
+                    <form id="logged-form" class="bg-white shadow-md rounded px-32 pb-81 mb-4">
+                        <h1 class="text-2xl font-semibold mb-8 mt-12 pt-96 px-20 ">Vous êtes déjà connecté!</h1>
                         <p class="font-semibold mb-8 mt-12 px-20 ">Vous pouvez vous déconnecter en cliquant sur le bouton ci-dessous.</p>
                         <div class="mt-8">
                             <input type="submit" value="Logout" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
@@ -36,6 +36,9 @@ const checkSessionId = () => {
     }
 };
 
+// Add CSS styles to make the page fit to the viewport
+document.body.style.height = '100vh';
+document.body.style.overflow = 'hidden';
 
 document.getElementById('login-form')?.addEventListener('submit', async function (event) {
     event.preventDefault();

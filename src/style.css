@@ -54,7 +54,18 @@ p {
       -1px  1px 0 #000,
        1px  1px 0 #000;
 }
-
+#logout form {
+    display: block;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: #fff;
+    padding-top: 6vh;
+    padding-bottom: 6vh;
+    margin-left: 2em;
+    margin-right: 2em;
+}
 #titleSearch {
     margin-bottom: 1em;
     align-items: center;
@@ -65,5 +76,38 @@ p {
 #moviePoster {
     border-radius: 4px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+#reviews {
+    margin-top: 20px;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+#movie-reviews {
+    background-color: #f2f2f2;
+}
+
+
+
+#movie-reviews div p {
+    margin-top: 20px;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+@media screen and (max-width: 768px) {
+
+    #movie-review p {
+        display: block;
+        
+    }
+
+    #reviews p strong {
+        display: block;
+        margin-top: 5vh;
+        padding-bottom: 1vh;
+    }
     
 }

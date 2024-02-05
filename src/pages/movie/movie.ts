@@ -1,4 +1,5 @@
 import { TMDB_API_KEY } from '../../auth/auth';
+import { createVoteBar } from '../../../script/rating'; // Replace '../../script/rating' with the correct file path '../../components/rating'
 
 const sessionId = localStorage.getItem('tmdb_session_id');
 
@@ -7,6 +8,9 @@ interface MovieDetails {
   poster_path: string;
   overview: string;
   id: number;
+  original_title: string;
+  vote_average: number;
+  vote_count: number;
 }
 
 interface MovieReview {
@@ -19,28 +23,38 @@ interface MovieReview {
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
 
+console.log('movieId:', movieId);
+
 
 if (movieId) {
   const movieUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}`;
   const reviewsUrl = `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${TMDB_API_KEY}`;
+  const vote_count = fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}`).then(response => response.json()).then(data => data.vote_count);
+  console.log('vote_count:', vote_count);
+
 
   fetch(movieUrl)
     .then(response => response.json())
     .then((movie: MovieDetails) => {
       const movieDetailsHTML = `
-      <div class="max-w-full bg-white pt-10 mb">
-        <div class="relative max-w-2xl mx-auto bg-white shadow-md rounded mt-0">
-          <h2 id="movieTitle" class="text-center bg-gray-400/90 flex-inline text-white text-4xl py-5 my-10 rounded-md" >${movie.title}</h2>
-        </div>
-        <div class="flex justify-center align-middle items-center pt-5 ">
-          <img src="https://image.tmdb.org/t/p/w400${movie.poster_path}" alt="${movie.title}">
-        </div>
-        <div class="mt-16 text-center mr-10 ml-10 mx-20">
-        <p class=" text-center text-md text-pretty font-bold mb-10">${movie.overview}</p>
-        </div>
-        <div class="h-10">
-      </div>
-      `;
+        <div class="max-w-full bg-white pt-10 mb">
+          <div class="relative max-w-2xl mx-auto bg-white shadow-md rounded mt-0">
+            <h2 id="movieTitle" class="text-center bg-gray-400/90 flex-inline text-white text-4xl py-5 my-10 rounded-sm">${movie.original_title}</h2>
+          </div>
+          <div class="flex justify-center align-middle items-center pt-5">
+            <img src="https://image.tmdb.org/t/p/w400${movie.poster_path}" alt="${movie.title}">
+          </div>
+          <div class="mt-16 text-center mr-10 ml-10 mx-20">
+            <p class="text-center text-md text-pretty font-bold mb-10">${movie.overview}</p>
+          </div>
+          <div class="flex justify-center text-center">
+            <div class="flex items-center text-xl">
+              <p class="text-center text-2xl text-blue-500 font-bold">Rating:</p>
+              <div class="mb-5">${createVoteBar(movie.vote_average)}
+              </div>
+            </div>
+          </div>
+        `;
 
       const movieDetails = document.getElementById('movie-details');
       if (movieDetails) {
@@ -62,7 +76,7 @@ if (movieId) {
         reviews.forEach(review => {
           reviewsHTML += `
             <div class="review">
-              <div class="text-center mx-20 border-separate bg-white my-5 py-5 shadow-xl border border-blue-200 rounded">
+              <div id="reviews" class="text-center border-separate bg-white my-5 py-5 shadow-xl border border-blue-200 rounded">
               <p class=" text-center flex-col text-xl mb-10"><strong>${review.author}</strong></p> 
               <div class="flex justify-center text-center">
               <p class=" px-5 text-pretty mx-22 min-w-80">${review.content}</p>
@@ -117,7 +131,9 @@ document.getElementById('rating-form')?.addEventListener('submit', event => {
       addMovieRating(movieId, rating);
       const ratingUpdated = document.getElementById('rating-updated');
       if (ratingUpdated) {
-        ratingUpdated.textContent = 'Your rate has been updated';
+        ratingUpdated.textContent = 'Votre vote a été enregistré. Merci !';
+        const vote_count = fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}`).then(response => response.json()).then(data => data.vote_count);
+        console.log('vote_count:', vote_count);
       }
     } else {
       console.error('No movie id found');

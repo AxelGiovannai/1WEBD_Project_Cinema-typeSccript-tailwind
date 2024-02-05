@@ -34,8 +34,8 @@ const url = "https://api.themoviedb.org/3/movie/popular?api_key=5f25c2d9763fcaf6
             <div class="mt-10 text-center mr-10 ml-10 mb-32">
               <p class="text-lg">${overview}</p>
             </div>
-            <div class="bg-blue-500 text-white font-bold py-2 ml-32 mr-32 rounded absolute bottom-5 left-0 right-0 mx-4 mb-6 mt-18">
-              <a href="../movie/movie.html?id=${movie.id}">Voir plus</a>
+            <div>
+              <a class="bg-blue-500 text-white hover:bg-blue-400 font-bold py-2 ml-32 mr-32 rounded absolute bottom-5 left-0 right-0 mx-4 mb-6 mt-18" href="../movie/movie.html?id=${movie.id}">Voir plus</a>
             </div>
           </div>
         `;
