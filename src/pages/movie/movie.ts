@@ -1,5 +1,7 @@
 import { TMDB_API_KEY } from '../../auth/auth';
 
+const sessionId = localStorage.getItem('tmdb_session_id');
+
 interface MovieDetails {
   title: string;
   poster_path: string;
@@ -83,7 +85,7 @@ if (movieId) {
 } else {
   console.error('No movie id found in the URL');
 }
-/*const addMovieRating = (movieId, rating) => {
+const addMovieRating = (movieId: string, rating: number) => {
   const url = `https://api.themoviedb.org/3/movie/${movieId}/rating?api_key=${TMDB_API_KEY}&session_id=${sessionId}`;
   const options = {
     method: 'POST',
@@ -99,4 +101,16 @@ if (movieId) {
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error('Error posting rating:', error));
-};/*/
+};
+document.getElementById('rating-form')?.addEventListener('submit', event => {
+  event.preventDefault();
+  const ratingInput = document.getElementById('rating') as HTMLInputElement;
+  if (ratingInput) {
+    const rating = Number(ratingInput.value);
+    if (movieId) {
+      addMovieRating(movieId, rating);
+    } else {
+      console.error('No movie id found');
+    }
+  }
+});
