@@ -11,6 +11,7 @@ interface MovieDetails {
   original_title: string;
   vote_average: number;
   vote_count: number;
+  release_date: string;
 }
 
 interface MovieReview {
@@ -51,6 +52,7 @@ if (movieId) {
             <div class="flex items-center text-xl">
               <p class="text-center text-2xl text-blue-500 font-bold">Rating:</p>
               <div class="mb-5">${createVoteBar(movie.vote_average)}
+              <p>${movie.release_date}</p>
               </div>
             </div>
           </div>
@@ -140,3 +142,27 @@ document.getElementById('rating-form')?.addEventListener('submit', event => {
     }
   }
 });
+
+const url = 'https://www.themoviedb.org/review/new?media_type=movie&media_id=';
+const options = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    media_type: 'movie',
+    media_id: movieId,
+    content: 'This movie was great!',
+    id:"",
+  }),
+};
+
+fetch(url, options)
+  .then(response => response.json())
+  .then(data => {
+    // Handle the response data
+  })
+  .catch(error => {
+    console.error('Error posting review:', error);
+  });
+
