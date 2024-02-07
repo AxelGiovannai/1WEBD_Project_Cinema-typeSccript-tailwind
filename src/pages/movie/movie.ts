@@ -1,7 +1,9 @@
 import { TMDB_API_KEY } from '../../auth/auth';
 import { createVoteBar } from '../../../script/rating'; 
-import { avatar_path } from '../../img/avatar';
+const avatarPath = '../../img/BasicAvatar.png';
 
+const Avatar = new Image();
+Avatar.src = avatarPath;
 const sessionId = localStorage.getItem('tmdb_session_id');
 
 interface MovieDetails {
@@ -81,17 +83,24 @@ if (movieId) {
     
     if (reviews.length) {
       reviews.forEach(review => {
-        let defaultAvatar = avatar_path;
+
         let avatarPath = review.author_details && review.author_details.avatar_path;
         let profileImage;
-        if (avatarPath) {
-          if (avatarPath.startsWith('/http')) {
-            profileImage = avatarPath.substring(1); 
-          } else {
+        
+        switch (true) {
+          case !!avatarPath && avatarPath.startsWith('/http'):
+            profileImage = avatarPath.substring(1);
+            break;
+          case !!avatarPath:
             profileImage = `https://image.tmdb.org/t/p/w45${avatarPath}`;
-          }
-        } else {
-          profileImage = defaultAvatar;
+            break;
+          default:
+            profileImage = Avatar.src;
+            break;
+        }
+        
+        if (!profileImage) {
+          profileImage = Avatar.src;
         }
 
         reviewsHTML += `
@@ -184,4 +193,3 @@ fetch(url, options)
   .catch(error => {
     console.error('Error posting review:', error);
   });
-

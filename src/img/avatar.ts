@@ -1,1 +1,1 @@
-export const avatar_path = "src/img/avatar.ts";  
+export const avatar_path = "src/img/BasicAvatar.png";
