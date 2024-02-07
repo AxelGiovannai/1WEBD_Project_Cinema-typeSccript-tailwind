@@ -47,12 +47,12 @@ if (movieId) {
           </div>
           <div class="mt-16 text-center mr-10 ml-10 mx-20">
             <p class="text-center text-md text-pretty font-bold mb-10">${movie.overview}</p>
+            <p class="text-center text-md text-pretty font-bold mb-10">Date de sorte : ${movie.release_date}</p>
           </div>
           <div class="flex justify-center text-center">
             <div class="flex items-center text-xl">
               <p class="text-center text-2xl text-blue-500 font-bold">Rating:</p>
               <div class="mb-5">${createVoteBar(movie.vote_average)}
-              <p>${movie.release_date}</p>
               </div>
             </div>
           </div>
