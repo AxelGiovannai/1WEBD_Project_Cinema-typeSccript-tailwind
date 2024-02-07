@@ -1,3 +1,8 @@
+/**
+ * Creates a vote bar based on the vote average.
+ * @param vote_average - The vote average value.
+ * @returns The vote bar string.
+ */
 export function createVoteBar(vote_average: number) {
     const rating = getRating(vote_average);
     const filledStars = "⭐".repeat(rating);

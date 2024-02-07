@@ -1,5 +1,8 @@
 import { TMDB_API_KEY } from './src/auth/auth';
 
+/**
+ * Checks if a session ID exists in the local storage and updates the UI accordingly.
+ */
 const checkSessionId = () => {
     const sessionId = localStorage.getItem('tmdb_session_id');
     if (sessionId) {
