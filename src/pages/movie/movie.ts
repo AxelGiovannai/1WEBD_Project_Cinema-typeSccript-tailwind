@@ -1,5 +1,6 @@
 import { TMDB_API_KEY } from '../../auth/auth';
-import { createVoteBar } from '../../../script/rating'; // Replace '../../script/rating' with the correct file path '../../components/rating'
+import { createVoteBar } from '../../../script/rating'; 
+import { avatar_path } from '../../img/avatar';
 
 const sessionId = localStorage.getItem('tmdb_session_id');
 
@@ -13,16 +14,21 @@ interface MovieDetails {
   vote_count: number;
   release_date: string;
 }
-
+interface AuthorDetails {
+  avatar_path?: string; 
+}
 interface MovieReview {
   author: string;
+  author_profile_path: string;
   content: string;
   id: string;
   url: string;
+  author_details: AuthorDetails;
 }
 
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
+const person_id = urlParams.get('id');
 
 console.log('movieId:', movieId);
 
@@ -67,32 +73,45 @@ if (movieId) {
     })
     .catch(error => console.error(error));
 
-  // Fetch reviews for the movie
-  fetch(reviewsUrl)
+    fetch(reviewsUrl)
     .then(response => response.json())
     .then(data => {
       const reviews = data.results as MovieReview[];
-      let reviewsHTML = '<h3 class=" px-10 py-4 font-bold text-center max-w-50 bg-blue-100 text-black text-2xl shadow-lg mb-20">Reviews</h3>';
-
+      let reviewsHTML = '<h3 class="px-10 py-4 font-bold text-center max-w-50 bg-blue-100 text-black text-2xl shadow-lg mb-20">Reviews</h3>';
+      
       if (reviews.length) {
         reviews.forEach(review => {
+          // Assurez-vous d'avoir le bon chemin pour votre image par défaut
+          let defaultAvatar = avatar_path;
+          let avatarPath = review.author_details && review.author_details.avatar_path;
+          let profileImage;
+          if (avatarPath) {
+            if (avatarPath.startsWith('/http')) {
+              profileImage = avatarPath.substring(1); 
+              profileImage = `https://image.tmdb.org/t/p/w45${avatarPath}`;
+            }
+          } else {
+            profileImage = defaultAvatar;
+          }
+  
           reviewsHTML += `
             <div class="review">
               <div id="reviews" class="text-center border-separate bg-white my-5 py-5 shadow-xl border border-blue-200 rounded">
-              <p class=" text-center flex-col text-xl mb-10"><strong>${review.author}</strong></p> 
-              <div class="flex justify-center text-center">
-              <p class=" px-5 text-pretty mx-22 min-w-80">${review.content}</p>
-              </div>
-              <div class="flex justify-center text-center">
-              <p class="text-center text-blue-500 font-bold"></p>
+                <div class="flex justify-center">
+                  <img src="${profileImage}" alt="Avatar de ${review.author}" class="w-20 h-20 rounded-full">
+                </div>
+                <p class="text-center flex-col text-xl mb-10"><strong>${review.author}</strong></p> 
+                <div class="flex justify-center text-center">
+                  <p class="px-5 text-pretty mx-22 min-w-80">${review.content}</p>
+                </div>
               </div>
             </div>
           `;
         });
       } else {
-        reviewsHTML += '<p class=" text-center justify-center bg-slate-50 text-black snap-center font-extralight decoration-dashed text-2xl">La section commentraire est vide...</p>';
+        reviewsHTML += '<p class="text-center justify-center bg-slate-50 text-black snap-center font-extralight decoration-dashed text-2xl">La section commentaire est vide...</p>';
       }
-
+  
       const reviewsElement = document.getElementById('movie-reviews');
       if (reviewsElement) {
         reviewsElement.innerHTML = reviewsHTML;

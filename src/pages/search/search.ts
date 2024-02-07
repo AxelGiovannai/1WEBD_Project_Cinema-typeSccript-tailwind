@@ -1,5 +1,5 @@
 import { TMDB_API_KEY } from '../../auth/auth';
-
+import { createVoteBar } from '../../../script/rating';
 let currentPage = 1;
 let isLoading = false;
 
