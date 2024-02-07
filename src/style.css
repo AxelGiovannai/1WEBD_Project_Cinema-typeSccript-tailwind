@@ -1,3 +1,113 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+#movieTitle {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-rendering: optimizeLegibility;
+    text-transform: uppercase;
+    text-shadow: 
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+      -1px  1px 0 #000,
+       1px  1px 0 #000;
+}
+#logout form {
+    display: block;
+    justify-content:center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: #fff;
+    padding-top: 6vh;
+    padding-bottom: 6vh;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+#titleSearch {
+    margin-bottom: 1em;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+}
+
+#moviePoster {
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+#reviews {
+    margin-top: 20px;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+#movie-reviews {
+    background-color: #f2f2f2;
+}
+
+
+
+#movie-reviews div p {
+    margin-top: 20px;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+@media screen and (max-width: 768px) {
+
+    #movie-review p {
+        display: block;
+        
+    }
+
+    #reviews p strong {
+        display: block;
+        margin-top: 5vh;
+        padding-bottom: 1vh;
+    }
+    
+}

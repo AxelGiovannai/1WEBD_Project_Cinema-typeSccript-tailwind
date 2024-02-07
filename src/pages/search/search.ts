@@ -1,5 +1,5 @@
 import { TMDB_API_KEY } from '../../auth/auth';
-
+import { createVoteBar } from '../../../script/rating';
 let currentPage = 1;
 let isLoading = false;
 
@@ -15,12 +15,25 @@ function searchMovies(query: string, page: number = 1) {
         .then(data => {
             let resultsContainer = document.getElementById('search-results');
             if (resultsContainer) {
-                data.results.forEach((movie: any) => {
+                data.results.forEach((movie: any, index: number) => {
                     let movieElement = document.createElement('div');
                     movieElement.innerHTML = `
-                        <h2>${movie.title}</h2>
-                        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title} poster">
-                        <a href="../movie/movie.html?id=${movie.id}">Find out more</a>
+                        <div id="movie-${index + 1}" class="relative max-w-md min-h-45em bg-white shadow-md rounded ${currentPage === 1 && index === 0 ? 'mt-10' : ''}">
+                            <div class="text-center text-2xl font-bold text-blue-500">
+                                <h2 id="titleSearch" class="px-20 py-5">${movie.title}</h2>
+                            </div>
+                            <div class="flex justify-center">
+                                <img class="w-50-h-50" id="moviePoster" src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" id="moviePoster">
+                            </div>
+                            <div class="mt-10 text-center mr-10 ml-10 mb-10">
+                            <p class="text-lg">${movie.overview.split('.')[0]}.</p>
+                            </div>
+                            <div>
+                                <a class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 ml-32 mr-32 rounded absolute bottom-5 left-0 right-0 mx-4 mb-6 mt-18" href="../movie/movie.html?id=${movie.id}">Voir plus</a>
+                            </div>
+                            <div class="h-28">
+                            </div>
+                        </div>
                     `;
                     resultsContainer?.appendChild(movieElement);
                 });
@@ -33,6 +46,7 @@ function searchMovies(query: string, page: number = 1) {
             console.error('There was an error with the fetch operation:', error);
             isLoading = false;
         });
+        
 }
 
 document.getElementById('search-bar')?.addEventListener('input', (e) => {
