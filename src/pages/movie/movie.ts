@@ -1,7 +1,9 @@
 import { TMDB_API_KEY } from '../../auth/auth';
 import { createVoteBar } from '../../../script/rating'; 
-import { avatar_path } from '../../img/avatar';
+const avatarPath = '../../img/BasicAvatar.png';
 
+const Avatar = new Image();
+Avatar.src = avatarPath;
 const sessionId = localStorage.getItem('tmdb_session_id');
 
 interface MovieDetails {
@@ -74,52 +76,59 @@ if (movieId) {
     .catch(error => console.error(error));
 
     fetch(reviewsUrl)
-    .then(response => response.json())
-    .then(data => {
-      const reviews = data.results as MovieReview[];
-      let reviewsHTML = '<h3 class="px-10 py-4 font-bold text-center max-w-50 bg-blue-100 text-black text-2xl shadow-lg mb-20">Reviews</h3>';
-      
-      if (reviews.length) {
-        reviews.forEach(review => {
-          // Assurez-vous d'avoir le bon chemin pour votre image par défaut
-          let defaultAvatar = avatar_path;
-          let avatarPath = review.author_details && review.author_details.avatar_path;
-          let profileImage;
-          if (avatarPath) {
-            if (avatarPath.startsWith('/http')) {
-              profileImage = avatarPath.substring(1); 
-              profileImage = `https://image.tmdb.org/t/p/w45${avatarPath}`;
-            }
-          } else {
-            profileImage = defaultAvatar;
-          }
-  
-          reviewsHTML += `
-            <div class="review">
-              <div id="reviews" class="text-center border-separate bg-white my-5 py-5 shadow-xl border border-blue-200 rounded">
-                <div class="flex justify-center">
-                  <img src="${profileImage}" alt="Avatar de ${review.author}" class="w-20 h-20 rounded-full">
-                </div>
-                <p class="text-center flex-col text-xl mb-10"><strong>${review.author}</strong></p> 
-                <div class="flex justify-center text-center">
-                  <p class="px-5 text-pretty mx-22 min-w-80">${review.content}</p>
-                </div>
+  .then(response => response.json())
+  .then(data => {
+    const reviews = data.results as MovieReview[];
+    let reviewsHTML = '<h3 class="px-10 py-4 font-bold text-center max-w-50 bg-blue-100 text-black text-2xl shadow-lg mb-20">Reviews</h3>';
+    
+    if (reviews.length) {
+      reviews.forEach(review => {
+
+        let avatarPath = review.author_details && review.author_details.avatar_path;
+        let profileImage;
+        
+        switch (true) {
+          case !!avatarPath && avatarPath.startsWith('/http'):
+            profileImage = avatarPath.substring(1);
+            break;
+          case !!avatarPath:
+            profileImage = `https://image.tmdb.org/t/p/w45${avatarPath}`;
+            break;
+          default:
+            profileImage = Avatar.src;
+            break;
+        }
+        
+        if (!profileImage) {
+          profileImage = Avatar.src;
+        }
+
+        reviewsHTML += `
+          <div class="review">
+            <div id="reviews" class="text-center border-separate bg-white my-5 py-5 shadow-xl border border-blue-200 rounded">
+              <div class="flex justify-center">
+                <img src="${profileImage}" alt="Avatar de ${review.author}" class="w-20 h-20 rounded-full">
+              </div>
+              <p class="text-center flex-col text-xl mb-10"><strong>${review.author}</strong></p> 
+              <div class="flex justify-center text-center">
+                <p class="px-5 text-pretty mx-22 min-w-80">${review.content}</p>
               </div>
             </div>
-          `;
-        });
-      } else {
-        reviewsHTML += '<p class="text-center justify-center bg-slate-50 text-black snap-center font-extralight decoration-dashed text-2xl">La section commentaire est vide...</p>';
-      }
-  
-      const reviewsElement = document.getElementById('movie-reviews');
-      if (reviewsElement) {
-        reviewsElement.innerHTML = reviewsHTML;
-      } else {
-        console.error('Element with id "movie-reviews" not found');
-      }
-    })
-    .catch(error => console.error('Error fetching reviews:', error));
+          </div>
+        `;
+      });
+    } else {
+      reviewsHTML += '<p class="text-center justify-center bg-slate-50 text-black snap-center font-extralight decoration-dashed text-2xl">La section commentaire est vide...</p>';
+    }
+
+    const reviewsElement = document.getElementById('movie-reviews');
+    if (reviewsElement) {
+      reviewsElement.innerHTML = reviewsHTML;
+    } else {
+      console.error('Element with id "movie-reviews" not found');
+    }
+  })
+  .catch(error => console.error('Error fetching reviews:', error));
 } else {
   console.error('No movie id found in the URL');
 }
@@ -184,4 +193,3 @@ fetch(url, options)
   .catch(error => {
     console.error('Error posting review:', error);
   });
-
