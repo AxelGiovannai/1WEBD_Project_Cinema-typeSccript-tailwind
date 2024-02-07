@@ -1,20 +1,21 @@
 import '../../style.css';
 
 interface Movie {
-    title: string;
-    poster_path: string;
-    overview: string;
-    id: number;
-  }
-
+  title: string;
+  poster_path: string;
+  overview: string;
+  id: number;
+}
 
 const url = "https://api.themoviedb.org/3/movie/popular?api_key=5f25c2d9763fcaf6baba5ecad2781305";
-  
-  fetch(url)
+let page = 1; // Track the current page
+
+const fetchMovies = () => {
+  fetch(`${url}&page=${page}`)
     .then(response => response.json())
     .then(data => {
       const movies: Movie[] = data.results;
-      
+
       let moviesHTML = '';
 
       movies.forEach(movie => {
@@ -43,9 +44,21 @@ const url = "https://api.themoviedb.org/3/movie/popular?api_key=5f25c2d9763fcaf6
 
       const moviesList = document.getElementById('movies-list');
       if (moviesList) {
-        moviesList.innerHTML = moviesHTML;
+        moviesList.innerHTML += moviesHTML; 
       } else {
         console.error('Element with id "movies-list" not found');
       }
-    })
-    
+
+      page++; 
+    });
+};
+
+fetchMovies();
+
+window.addEventListener('scroll', () => {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+  if (scrollTop + clientHeight >= scrollHeight - 5) {
+    fetchMovies(); 
+  }
+});
